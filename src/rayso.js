@@ -159,7 +159,7 @@ export class RaySo {
                     '--no-zygote',
                     '--disable-gpu',
                 ],
-                headless: false,
+                headless: true,
                 ignoreHTTPSErrors: true,
             })
 
