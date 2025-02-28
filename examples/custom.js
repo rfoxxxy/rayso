@@ -14,12 +14,13 @@ import RaySo, {
 } from '../index.js'
 const raySo = new RaySo({
     title: 'Custom Title',
-    theme: CardTheme.CANDY,
+    theme: CardTheme.TAILWIND,
     padding: CardPadding.md,
-    language: CardProgrammingLanguage.JS,
+    width: null,
+    language: CardProgrammingLanguage.JSON,
     debug: true,
     localPreview: true,
-    localPreviewPath: '/Users/s0ftik3/rayso_screenshots',
+    localPreviewPath: '/Users/rf0x3d/',
 })
 
 raySo

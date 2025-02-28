@@ -28,7 +28,7 @@ export const CardTheme = {
   MEADOW: "meadow",
   MIDNIGHT: "midnight",
   RAINDROP: "raindrop",
-  SUNSET: "sunset",
+  SUNSET: "sunset"
 };
 
 export const CardPadding = {

@@ -51,6 +51,10 @@ export class RaySo {
             Determines the size of the padding
             around the content of the uploaded text.
             Default is 32.
+        * @param {(
+            Number
+        )} [options.width]
+            Determines the width of content
         * @param {String} [options.language]
             The language the code is in.
             Default is auto.
@@ -78,6 +82,7 @@ export class RaySo {
         background = true,
         darkMode = true,
         padding = CardPadding.md,
+        width = null,
         language = CardProgrammingLanguage.AUTO,
         localPreview = false,
         localPreviewPath = '',
@@ -88,6 +93,7 @@ export class RaySo {
         this.background = background
         this.darkMode = darkMode
         this.padding = padding
+        this.width = width
         this.language = language
         this.localPreview = localPreview
         this.localPreviewPath = localPreviewPath
@@ -108,6 +114,7 @@ export class RaySo {
                 background: this.background,
                 darkMode: this.darkMode,
                 padding: this.padding,
+                width: this.width,
                 language: this.language,
                 localPreview: this.localPreview,
                 localPreviewPath: this.localPreviewPath,
@@ -152,7 +159,7 @@ export class RaySo {
                     '--no-zygote',
                     '--disable-gpu',
                 ],
-                headless: true,
+                headless: false,
                 ignoreHTTPSErrors: true,
             })
 
@@ -198,6 +205,7 @@ export class RaySo {
             return page
         } catch (err) {
             console.error(err)
+            return this.openPage(browser, code)
         }
     }
 
@@ -280,7 +288,7 @@ export class RaySo {
             )}&theme=${this.theme}&padding=${this.padding}&background=${this.background
                 }&darkMode=${this.darkMode}&code=${encodeURIComponent(
                     this.stringToBase64(code)
-                )}&language=${encodeURIComponent(this.language)}`
+                )}&language=${encodeURIComponent(this.language)}&width=${this.width}`
         } catch (err) {
             console.error(err)
         }
@@ -356,6 +364,15 @@ export class RaySo {
                 )
             } else if (!paddings.includes(+params.padding)) {
                 errors.push('Padding parameter must be 16, 32, 64 or 128.')
+            }
+
+            if (
+                typeof params.width !== 'number' &&
+                params.width !== null
+            ) {
+                errors.push(
+                    'Width parameter must be type of number or null.'
+                )
             }
 
             if (typeof params.language !== 'string') {
